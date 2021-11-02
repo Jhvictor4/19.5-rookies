@@ -39,11 +39,14 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
+    'django_filters',
     'rest_framework',
     'rest_framework_jwt',
     'rest_framework.authtoken',
+    'common',
     'survey.apps.SurveyConfig',
-    'user.apps.UserConfig'
+    'user.apps.UserConfig',
+    'seminar.apps.SeminarConfig'
 ]
 
 MIDDLEWARE = [
@@ -87,7 +90,7 @@ WSGI_APPLICATION = 'waffle_backend.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'HOST': 'localhost',
+        'HOST': 'django-seminar.cxyxtgb7bhge.ap-northeast-2.rds.amazonaws.com',
         'PORT': 3306,
         'NAME': 'waffle_backend_2',  # database name 변경
         'USER': 'waffle-backend',
@@ -147,7 +150,8 @@ REST_FRAMEWORK = {
     ),
 
     'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+       'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+       'rest_framework.authentication.SessionAuthentication'
     ),
 }
 
@@ -169,3 +173,5 @@ JWT_AUTH = {
 
 # Custom User Model
 AUTH_USER_MODEL = 'user.User'
+
+SITE_ID = 3
